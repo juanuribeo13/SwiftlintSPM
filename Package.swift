@@ -11,11 +11,19 @@ let package = Package(
             name: "SwiftlintSPM",
             targets: ["SwiftlintSPM"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/realm/SwiftLint", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftlintSPM"),
+            name: "SwiftlintSPM",
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+            ]
+        ),
         .testTarget(
             name: "SwiftlintSPMTests",
             dependencies: ["SwiftlintSPM"]),
